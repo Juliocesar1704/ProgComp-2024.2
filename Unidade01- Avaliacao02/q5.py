@@ -17,7 +17,7 @@ for dia in range ( contador + 1):
     if dia_atual == 5:
         dia_de_sabado += 1
 
-
+#Aqui iremos apenas apresentar as informações solicitadas, de forma coesa
 print("Data inicial:", data_inicial)
 print(f"Desde {data_inicial}, na presente data {hoje}, fazem cerca de {contador} dias")
 print("Hoje é:", dia_da_semana)
