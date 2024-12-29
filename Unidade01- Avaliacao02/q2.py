@@ -1,7 +1,13 @@
+# Codigo feito por Júlio César e David Douglas
+
+numN = 10
+# Declaramos aqui qual o primeiro número primo e onde devemos começar
+limite = 10000
+# Aqui declaramos até onde podemos chegar
 contadorP = 0 
 # Aqui declaramos a variavel que vai contar a quantidade de palindromos
 
-for pos in range(10, 10000 + 1): 
+for pos in range(numN, limite + 1): 
     # Procura os números palindromos entre 10 e 100000
     num = pos 
     # Recebe e guarda o numero
@@ -24,3 +30,19 @@ for pos in range(10, 10000 + 1):
 
 print(f"A quantidade de numeros palindromos entre 10 e 10000 é : {contadorP}")
 # Aqui exibimos a quantidae de palindromos entre 10 e 10000
+
+"""
+Ideias para melhorar o código:
+
+# Peidr para o usuário digitar o o inicio e o fim do intervalo
+numN = int(input("Digite o primeiro número: "))
+limite = int(input("Digite o limite: "))
+
+# Adicionar uma lista para armazenar os números palindromos encontrados e exibilos no final
+
+# Adicionar a quantidade total de números palindromos encontrados
+print(f"A quantidade total de números palindromos entre 10 e 10000 é: {contadorP}")
+
+# Adicionar uma lista para armazenar os números palindromos encontrados e exibilos no final
+
+"""
