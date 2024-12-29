@@ -1,26 +1,45 @@
-# Estaremos utilizando de uma biblioteca para usar das funções determinadas no enunciado da questão
 import datetime
-# Poderiamos trocar a data inicial para uma váriavel onde o abençoado que fosse testar o código iria digitar um data
-# Com isto o código apresentaria mais algumas váriaveis afim de evitar que seja informado dados divergente do que o código está preposto a fazer
-data_inicial = datetime.date(1968, 4, 27)
+
+# Data inicial
+ano_inicial = 1968
+mes_inicial = 4
+dia_inicial = 27
+
+# Obtendo a data atual
 hoje = datetime.date.today()
-contador = (hoje - data_inicial).days
-#Essa função é só por estética para informar o dia da semana não interfere no código
+ano_hoje, mes_hoje, dia_hoje = hoje.year, hoje.month, hoje.day
+
+# Contando anos bissextos manualmente
+anos_bissextos = 0
+for ano in range(ano_inicial, ano_hoje + 1):
+    if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
+        anos_bissextos += 1
+
+# 
+dias_no_ano_inicial = (12 - mes_inicial) * 30 + (30 - dia_inicial)
+
+# 
+dias_no_ano_atual = (mes_hoje - 1) * 30 + dia_hoje
+
+# 
+anos_completos = ano_hoje - ano_inicial - 1
+dias_anos_intermediarios = anos_completos * 365
+
+
+dias_totais = dias_no_ano_inicial + dias_no_ano_atual + dias_anos_intermediarios + anos_bissextos
+
+# Contabilizando os sábados
+# O dia 27 de abril de 1968 é um sábado (dia 5 na semana) determinado pela questão
+sabados_contados = 0
+for dia in range(dias_totais + 1):
+    if (dia + 5) % 7 == 0:
+        sabados_contados += 1
+
+
 dia_da_semana = hoje.strftime('%A, %d %B %Y')
-dia_inicial = 0
-# Partindo desda parte do código começaremos a contabilizar o sabádos que é o dia 5 da semana 5 na linguagem onde começa em 0 
-# Segunda = 0, Terça = 1, Quarta = 2, Quinta = 3, sexta = 4 e o sabado = 5
-# A divisão por 7 para localizar os dias que serão o quinto = sabádo seguindo a lógica acima citada
-dia_de_sabado = 5
-for dia in range ( contador + 1):
-    dia_atual = (dia_inicial + dia) % 7
-    if dia_atual == 5:
-        dia_de_sabado += 1
 
-#Aqui iremos apenas apresentar as informações solicitadas, de forma coesa
-print("Data inicial:", data_inicial)
-print(f"Desde {data_inicial}, na presente data {hoje}, fazem cerca de {contador} dias")
+# Exibindo os resultados
+print(f"Data inicial: {ano_inicial}-{mes_inicial}-{dia_inicial}")
+print(f"Desde {ano_inicial}{mes_inicial}{dia_inicial}, na presente data {hoje}, fazem cerca de {dias_totais} dias")
 print("Hoje é:", dia_da_semana)
-print (f'Se passou {dia_de_sabado} dias de sabados, até presente data')
-
-#Criação de David Douglas
+print(f"Se passaram {sabados_contados} sábados até a presente data.")
