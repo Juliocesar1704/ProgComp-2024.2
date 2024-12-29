@@ -34,13 +34,13 @@ print(f"A quantidade de pares de números primos consecutivos entre 3 e 1000000 
 """
 Ideias para melhorar o código:
 
-'Peidr para o usuário digitar o o inicio e o fim do intervalo
+# Peidr para o usuário digitar o o inicio e o fim do intervalo
 primeiro_primo = int(input("Digite o primeiro número primo: "))
-limite = int(input("Digite o limite: "))'
+limite = int(input("Digite o limite: "))
 
-'Adicionar uma lista para armazenar os números primos encontrados e exibilos no final'
+# Adicionar uma lista para armazenar os números primos encontrados e exibilos no final
 
-'Adicionando a quantidade total de números primos encontrados
-print(f"A quantidade total de números primos entre 3 e 1000000 é: {qtdPrimos}")'
+# Adicionando a quantidade total de números primos encontrados
+print(f"A quantidade total de números primos entre 3 e 1000000 é: {qtdPrimos}")
 
 """
