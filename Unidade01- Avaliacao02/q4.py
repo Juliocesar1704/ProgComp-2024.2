@@ -1,6 +1,13 @@
 import random
-palavras = (
-    "ADAGA", "ADUBO", "AMIGO", "ANEXO", "ARAME", "ARARA", "ARROZ",
+
+# Configuração de cores
+reset_cor = '\033[0;0m'  # Retoma a cor padrão
+letra_inexiste = '\033[40m'     # Fundo preto
+letra_pos_errado = '\033[43m'   # Fundo amarelo
+letra_pos_correta = '\033[42m'  # Fundo verde
+
+# Lista de palavras possíveis
+termo = ("ADAGA", "ADUBO", "AMIGO", "ANEXO", "ARAME", "ARARA", "ARROZ",
     "ASILO", "ASTRO", "BAILE", "BAIXA", "BALAO", "BALSA", "BARCO",
     "BARRO", "BEIJO", "BICHO", "BORDA", "BORRA", "BRAVO", "BREJO",
     "BURRO", "CAIXA", "CALDO", "CANJA", "CARRO", "CARTA", "CERVO",
@@ -19,28 +26,61 @@ palavras = (
     "SALTO", "SENSO", "SINAL", "SITIO", "SONHO", "SOPRO", "SURDO",
     "TARDE", "TERNO", "TERMO", "TERRA", "TIGRE", "TINTA", "TOLDO",
     "TORRE", "TRAJE", "TREVO", "TROCO", "TRONO", "TURMA", "URUBU",
-    "VALSA", "VENTO", "VERDE", "VISAO", "VINHO", "VIUVO", "ZEBRA"
-    )
+    "VALSA", "VENTO", "VERDE", "VISAO", "VINHO", "VIUVO", "ZEBRA")
 
-palavra1 = random.choice(palavras)
-palavra2 = random.choice(palavras)
-palavra3 = "-"*len(palavra1)
-palavra4 = "-"*len(palavra2)
+# Palavras sorteadas
+sorteada_1 = random.choice(termo)
+sorteada_2 = random.choice(termo)
+fim_do_jogo = False
+chances = 7
 
-print("Termoo versão dueto")
-print(f"Tente adivinhar as palavras: {palavra3} {palavra4}")
+# Instruções
+print("Dicas do jogo")
+print("Você deve escolher duas palavras com até 5 letras cada.")
+print(letra_pos_correta + "T" + reset_cor + "ERNO -> a letra 'T' faz parte da palavra e está na posição correta")
+print("VA" + letra_pos_errado + "L" + reset_cor + "SA -> a letra 'L' faz parte da palavra, mas em outra posição")
+print("PUL" + letra_inexiste + "G" + reset_cor + "A -> a letra 'G' não faz parte da palavra")
+print("------------------------------------------------------------------------------------")
 
-palavra5 = str(input("Digite uma palavra: "))
+# Loop principal
+while not fim_do_jogo:
+    tela_1, tela_2 = [], []
+    chute1 = input("Digite a primeira palavra (5 letras): ").upper()[:5]
+    chute2 = input("Digite a segunda palavra (5 letras): ").upper()[:5]
+    chances -= 1
 
-tentativas = 7
+    # Verificação de vitória
+    if chute1 == sorteada_1 and chute2 == sorteada_2:
+        print(f"Parabéns, você acertou as duas palavras! ({sorteada_1} e {sorteada_2})")
+        fim_do_jogo = True
+    elif chances == 0:
+        print(f"Acabaram as chances. As palavras eram {sorteada_1} e {sorteada_2}.")
+        fim_do_jogo = True
+    else:
+        # Verificação da palavra 1
+        i = 0
+        for c in chute1:
+            if c in sorteada_1:
+                if c == sorteada_1[i]:
+                    tela_1.append(letra_pos_correta + c + reset_cor)
+                else:
+                    tela_1.append(letra_pos_errado + c + reset_cor)
+            else:
+                tela_1.append(letra_inexiste + c + reset_cor)
+            i += 1
 
-while(tentativas > 0) and (palavra5 != palavra3) and (palavra5 != palavra4):
-    palavra5 = str(input("Digite uma palavra: "))
-    tentativas -= 1
-    
-    if palavra5 == palavra3 and palavra5 != palavra4:
-        print("Parabéns você acertou a primeira palavra!")
-    elif palavra5 == palavra4 and palavra5 != palavra3:
-        print("Parabéns você acertou a segunda palavra!")
-    elif palavra5 == palavra3 and palavra5 == palavra4:
-        print("Parabéns você acertou as duas palavras!")
+        # Verificação da palavra 2
+        i = 0
+        for c in chute2:
+            if c in sorteada_2:
+                if c == sorteada_2[i]:
+                    tela_2.append(letra_pos_correta + c + reset_cor)
+                else:
+                    tela_2.append(letra_pos_errado + c + reset_cor)
+            else:
+                tela_2.append(letra_inexiste + c + reset_cor)
+            i += 1
+
+        # Exibição dos resultados
+        print("Palavra 1:", ''.join(tela_1))
+        print("Palavra 2:", ''.join(tela_2))
