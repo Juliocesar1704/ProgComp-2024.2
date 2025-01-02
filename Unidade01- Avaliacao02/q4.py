@@ -27,7 +27,7 @@ palavra2 = random.choice(palavras)
 palavra3 = "-"*len(palavra1)
 palavra4 = "-"*len(palavra2)
 
-print("Termoo verçao dueto")
+print("Termoo versão dueto")
 print(f"Tente adivinhar as palavras: {palavra3} {palavra4}")
 
 palavra5 = str(input("Digite uma palavra: "))
