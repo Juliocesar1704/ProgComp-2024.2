@@ -1,3 +1,5 @@
+# Codigo feito por Júlio César e David Douglas
+
 import random
 
 # Configuração de cores
@@ -66,8 +68,10 @@ while not fim_do_jogo:
     # Verificação de vitória 
     if chute1 == sorteada_1: 
         acertou_palavra_1 = True 
+        print(f"Você acertou a primeira palavra: {sorteada_1}")
     if chute1 == sorteada_2: 
         acertou_palavra_2 = True 
+        print(f"Você acertou a segunda palavra: {sorteada_2}")
     if acertou_palavra_1 and acertou_palavra_2: 
         print(f"Parabéns, você acertou as duas palavras! ({sorteada_1} e {sorteada_2})") 
         
