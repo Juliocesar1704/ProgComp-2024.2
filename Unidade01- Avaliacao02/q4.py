@@ -51,13 +51,17 @@ while not fim_do_jogo:
     tela_2 = ""
     chute1 = input("Digite a palavra (5 letras): ").upper()[:5]
 
-    # Verificação se a palavra está na lista de termos 
+    # Verificação se a palavra está na lista da vareavel termo
     if chute1 not in termo:    
         print("Palavra inválida. ")
         print("Tente novamente.")
         chute1 = input("Digite a palavra (5 letras): ").upper()[:5]
-    else:
         chances -= 1
+        print(f"Você tem {chances} chances restantes.")
+
+    elif chute1 in termo:
+        chances -= 1
+        print(f"Você tem {chances} chances restantes.")
 
     # Verificação de vitória 
     if chute1 == sorteada_1: 
