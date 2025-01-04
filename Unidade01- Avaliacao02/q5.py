@@ -1,3 +1,4 @@
+# Codigo feito por Júlio César e David Douglas
 
 import datetime
 
@@ -8,7 +9,7 @@ dia_inicial = 27
 
 # Obtendo a data atual e formatando para normas brasileira de exibição que será Dia/Mes/Ano
 hoje = datetime.date.today()
-hoje_formato_BR = hoje.strftime('%d/%M/%Y')
+hoje_formato_BR = hoje.strftime('%d/%m/%Y')
 ano_hoje, mes_hoje, dia_hoje = hoje.year, hoje.month, hoje.day
 
 # Contando anos bissextos manualmente
@@ -32,11 +33,11 @@ for dia in range(dias_totais + 1):
     if (dia + 5) % 7 == 0:
         sabados_contados += 1
 
-#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data em ingles, a formatação em BR deu erro 
+#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data
 dia_da_semana = hoje.strftime('%A, %d de %B de %Y')
 
 # Exibindo os resultados
-print(f"Data inicial: {ano_inicial}-{mes_inicial}-{dia_inicial}")
-print(f"Desde {ano_inicial}{mes_inicial}{dia_inicial}, na presente data {hoje}, fazem cerca de {dias_totais} dias")
+print(f"Data inicial: {dia_inicial}/{mes_inicial}/{ano_inicial}")
+print(f"Desde {dia_inicial}/{mes_inicial}/{ano_inicial}, na presente data {hoje_formato_BR}, fazem cerca de {dias_totais} dias")
 print(f"Hoje é {dia_da_semana}")
 print(f"Se passaram {sabados_contados} sábados até a presente data.")
