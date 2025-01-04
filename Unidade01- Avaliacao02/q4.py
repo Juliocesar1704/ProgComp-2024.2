@@ -45,11 +45,8 @@ print(letra_pos_correta + "T" + reset_cor + "ERNO -> a letra 'T' faz parte da pa
 print("VA" + letra_pos_errado + "L" + reset_cor + "SA -> a letra 'L' faz parte da palavra, mas em outra posição.")
 print("PUL" + letra_inexiste + "G" + reset_cor + "A -> a letra 'G' não faz parte da palavra.")
 print(f"Voce tem {chances} chances para acertar as duas palavras.")
-print("------------------------------------------------------------------------------------")
+print("-------------------------------------------------------------------------------------")
 
-
-print(sorteada_1)
-print(sorteada_2)
 # Loop de entrada
 while not fim_do_jogo:
     tela_1 = ""
