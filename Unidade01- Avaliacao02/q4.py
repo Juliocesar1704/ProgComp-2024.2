@@ -47,25 +47,24 @@ print("PUL" + letra_inexiste + "G" + reset_cor + "A -> a letra 'G' não faz part
 print(f"Voce tem {chances} chances para acertar as duas palavras.")
 print("------------------------------------------------------------------------------------")
 
+
+print(sorteada_1)
+print(sorteada_2)
 # Loop de entrada
 while not fim_do_jogo:
     tela_1 = ""
     tela_2 = ""
     chute1 = input("Digite a palavra (5 letras): ").upper()[:5]
 
-    # Verificação se a palavra está na lista da vareavel termo
-    if chute1 not in termo:    
-        print("Palavra inválida. ")
-        print("Tente novamente.")
-        chute1 = input("Digite a palavra (5 letras): ").upper()[:5]
-        chances -= 1
-        print(f"Você tem {chances} chances restantes.")
+    # Verificação se a palavra está na lista da variável termo
+    if chute1 not in termo:
+        print("Palavra inválida. Tente novamente.")
+        continue
 
-    elif chute1 in termo:
-        chances -= 1
-        print(f"Você tem {chances} chances restantes.")
+    chances -= 1
+    print(f"Você tem {chances} chances restantes.")
 
-    # Verificação de vitória 
+    # Verificação de vitória
     if chute1 == sorteada_1: 
         acertou_palavra_1 = True 
         print(f"Você acertou a primeira palavra: {sorteada_1}")
@@ -89,34 +88,39 @@ while not fim_do_jogo:
             print("Foi por pouco")
     
         fim_do_jogo = True 
-    
-    elif chances == 0: 
-        print(f"Acabaram as chances. As palavras eram {sorteada_1} e {sorteada_2}.") 
+    elif chances == 0:
+        print(f"Acabaram as chances. As palavras eram {sorteada_1} e {sorteada_2}.")
         fim_do_jogo = True 
     else:
         # Verificação da palavra 1
-        i = 0
-        for c in chute1:
-            if c in sorteada_1:
-                if c == sorteada_1[i]:
-                    tela_1 += (letra_pos_correta + c + reset_cor)
+        if acertou_palavra_1:
+            tela_1 = letra_pos_correta + sorteada_1 + reset_cor
+        else:
+            i = 0
+            for c in chute1:
+                if c in sorteada_1:
+                    if c == sorteada_1[i]:
+                        tela_1 += (letra_pos_correta + c + reset_cor)
+                    else:
+                        tela_1 += (letra_pos_errado + c + reset_cor)
                 else:
-                    tela_1 += (letra_pos_errado + c + reset_cor)
-            else:
-                tela_1 += (letra_inexiste + c + reset_cor)
-        i += 1
+                    tela_1 += (letra_inexiste + c + reset_cor)
+                i += 1
 
-            # Verificação da palavra 2
-        i = 0
-        for c in chute1:
-            if c in sorteada_2:
-                if c == sorteada_2[i]:
-                    tela_2 += (letra_pos_correta + c + reset_cor)
+        # Verificação da palavra 2
+        if acertou_palavra_2:
+            tela_2 = letra_pos_correta + sorteada_2 + reset_cor
+        else:
+            i = 0
+            for c in chute1:
+                if c in sorteada_2:
+                    if c == sorteada_2[i]:
+                        tela_2 += (letra_pos_correta + c + reset_cor)
+                    else:
+                        tela_2 += (letra_pos_errado + c + reset_cor)
                 else:
-                    tela_2 += (letra_pos_errado + c + reset_cor)
-            else:
-                tela_2 += (letra_inexiste + c + reset_cor)
-        i += 1
+                    tela_2 += (letra_inexiste + c + reset_cor)
+                i += 1
 
         # Exibição dos resultados
         print("Palavra 1:", ''.join(tela_1))
