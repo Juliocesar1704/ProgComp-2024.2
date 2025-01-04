@@ -1,11 +1,12 @@
 # Codigo feito por Júlio César e David Douglas
 
-numN = 10
+
 # Declaramos aqui qual o primeiro número primo e onde devemos começar
-limite = 10000
+numN = 10
 # Aqui declaramos até onde podemos chegar
-contadorP = 0 
+limite = 1000000
 # Aqui declaramos a variavel que vai contar a quantidade de palindromos
+contadorP = 0 
 
 for pos in range(numN, limite + 1): 
     # Procura os números palindromos entre 10 e 100000
@@ -28,8 +29,8 @@ for pos in range(numN, limite + 1):
         contadorP += 1 
         # adiciona 1 ao contador
 
-print(f"A quantidade de numeros palindromos entre 10 e 10000 é : {contadorP}")
-# Aqui exibimos a quantidae de palindromos entre 10 e 10000
+print(f"A quantidade de numeros palindromos entre 10 e 1000000 é : {contadorP}")
+# Aqui exibimos a quantidae de palindromos entre 10 e 1000000
 
 """
 Ideias para melhorar o código:
