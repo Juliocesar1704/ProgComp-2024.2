@@ -33,7 +33,7 @@ for dia in range(dias_totais + 1):
     if (dia + 5) % 7 == 0:
         sabados_contados += 1
 
-#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data
+#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data tentamos utilizar para PT.BR porém deu erro
 dia_da_semana = hoje.strftime('%A, %d de %B de %Y')
 
 # Exibindo os resultados
