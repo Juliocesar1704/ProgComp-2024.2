@@ -1,3 +1,4 @@
+import locale
 import datetime
 
 # Data inicial
@@ -15,16 +16,11 @@ for ano in range(ano_inicial, ano_hoje + 1):
     if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
         anos_bissextos += 1
 
-# 
+# Ele fará as contagens do dias partindo da data primária que a questão 
 dias_no_ano_inicial = (12 - mes_inicial) * 30 + (30 - dia_inicial)
-
-# 
 dias_no_ano_atual = (mes_hoje - 1) * 30 + dia_hoje
-
-# 
 anos_completos = ano_hoje - ano_inicial - 1
 dias_anos_intermediarios = anos_completos * 365
-
 
 dias_totais = dias_no_ano_inicial + dias_no_ano_atual + dias_anos_intermediarios + anos_bissextos
 
@@ -35,7 +31,8 @@ for dia in range(dias_totais + 1):
     if (dia + 5) % 7 == 0:
         sabados_contados += 1
 
-
+#Apenas uma questão estética ele não interfere no código, apenas mostra por extenos a data
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 dia_da_semana = hoje.strftime('%A, %d %B %Y')
 
 # Exibindo os resultados
