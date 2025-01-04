@@ -27,7 +27,7 @@ for num_inicial in range(inicio, fim + 1):
         soma_decrescente += num_inicial  # Somando apenas os números decrescentes no parametro do conjunto
 
 # Exibindo a soma dos números decrescentes
-print(f"A soma dos números decrescente de {inicio} até {fim} é: {soma_decrescente}")
+print(f"A quantidade de números decrescente de {inicio} até {fim} é: {soma_decrescente}")
 
 """
 Ideias para melhorar o código:
