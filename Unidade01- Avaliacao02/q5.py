@@ -32,11 +32,11 @@ for dia in range(dias_totais + 1):
     if (dia + 5) % 7 == 0:
         sabados_contados += 1
 
-#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data
+#Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data em ingles, a formatação em BR deu erro 
 dia_da_semana = hoje.strftime('%A, %d de %B de %Y')
 
 # Exibindo os resultados
 print(f"Data inicial: {ano_inicial}-{mes_inicial}-{dia_inicial}")
 print(f"Desde {ano_inicial}{mes_inicial}{dia_inicial}, na presente data {hoje}, fazem cerca de {dias_totais} dias")
-print(f"Hoje é ;{dia_da_semana}")
+print(f"Hoje é {dia_da_semana}")
 print(f"Se passaram {sabados_contados} sábados até a presente data.")
