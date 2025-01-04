@@ -31,6 +31,19 @@ for num in range(primeiro_primo, limite + 1, 2):
 
 print(f"A quantidade de pares de números primos consecutivos entre 3 e 1000000 é: {pares_de_primos}")
 
+
+# OBS: O código está correto, porém, demora muito tempo para rodar, pois o numero limite é muito grande.
+# Testamos o codigo com outros limites e ele funcionou perfeitamente, porém, com limites muito grandes, ele demora muito para rodar.
+"""
+Algums limites que usamos para testar o código:
+
+3 a 100 -> 8 pares
+3 a 1000 -> 35 pares
+3 a 10000 -> 205 pares
+3 a 100000 -> 1224 pares
+
+"""
+
 """
 Ideias para melhorar o código:
 
