@@ -1,4 +1,4 @@
-import locale
+
 import datetime
 
 # Data inicial
@@ -6,8 +6,9 @@ ano_inicial = 1968
 mes_inicial = 4
 dia_inicial = 27
 
-# Obtendo a data atual
+# Obtendo a data atual e formatando para normas brasileira de exibição que será Dia/Mes/Ano
 hoje = datetime.date.today()
+hoje_formato_BR = hoje.strftime('%d/%M/%Y')
 ano_hoje, mes_hoje, dia_hoje = hoje.year, hoje.month, hoje.day
 
 # Contando anos bissextos manualmente
@@ -32,7 +33,6 @@ for dia in range(dias_totais + 1):
         sabados_contados += 1
 
 #Apenas uma questão estética ele não interfere no código, apenas mostra por extenso a data
-locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 dia_da_semana = hoje.strftime('%A, %d de %B de %Y')
 
 # Exibindo os resultados
