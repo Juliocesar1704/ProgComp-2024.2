@@ -38,5 +38,5 @@ dia_da_semana = hoje.strftime('%A, %d de %B de %Y')
 # Exibindo os resultados
 print(f"Data inicial: {ano_inicial}-{mes_inicial}-{dia_inicial}")
 print(f"Desde {ano_inicial}{mes_inicial}{dia_inicial}, na presente data {hoje}, fazem cerca de {dias_totais} dias")
-print(f"Hoje é ;{dia_da_semana})
+print(f"Hoje é ;{dia_da_semana}")
 print(f"Se passaram {sabados_contados} sábados até a presente data.")
