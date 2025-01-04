@@ -1,6 +1,5 @@
 # Codigo feito por Júlio César e David Douglas
 
-
 # Declaramos aqui qual o primeiro número primo e onde devemos começar
 numN = 10
 # Aqui declaramos até onde podemos chegar
