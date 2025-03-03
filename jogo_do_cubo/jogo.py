@@ -4,13 +4,13 @@ import random
 
 pygame.init()
 
-# Dimensões da tela
+# Dimensões da tela 
 altura_da_tela = 600
 largura_da_tela = 1000
-gameDisplay = pygame.display.set_mode((largura_da_tela, altura_da_tela))
+gameDisplay = pygame.display.set_mode((largura_da_tela, altura_da_tela)) 
 pygame.display.set_caption("Corrida do Cubo")
 
-# Lista de cores
+# Lista de cores em Duplas com 3 valores
 cores = [
     (255, 255, 255),  # WHITE
     (0, 0, 0),        # BLACK
@@ -26,13 +26,48 @@ cores = [
     (255, 105, 180),  # PINK
     (128, 128, 128),  # GRAY
 ]
-
 # Fonte para exibir "Game Over"
 fonte = pygame.font.Font(None, 50)
 
-# Carregar a imagem de fundo **fora do loop principal**
-fundo = pygame.image.load(r"C:\Users\david douglas\Downloads\space.JPEG")  # Caminho corrigido
-fundo = pygame.transform.scale(fundo, (largura_da_tela, altura_da_tela))  # Ajusta ao tamanho da tela
+# Geração da soundtrack do game
+musica_de_fundo1 = pygame.mixer.music.load('space.mp3')
+pygame.mixer.music.play(-1)
+
+# Carregar a imagem de fundo
+fundo1 = pygame.image.load('fundo.jpg')  
+fundo1 = pygame.transform.scale(fundo1, (largura_da_tela, altura_da_tela)) 
+
+
+# Função para exibir as instruções na tela inicial
+def exibir_instrucoes():
+    instrucoes_font = pygame.font.Font(None, 50)
+    gameDisplay.blit(fundo1, (0, 0)) # Fundo para as instruções
+
+    texto_titulo = instrucoes_font.render("Bem-vindo ao Jogo da Corrida do Cubo!", True, (255, 255, 255))
+    gameDisplay.blit(texto_titulo, (largura_da_tela // 20, altura_da_tela // 4))
+    texto_instrucoes1 = instrucoes_font.render("Use as setas para movimentar o cubo:", True, (255, 255, 255))
+    gameDisplay.blit(texto_instrucoes1, (largura_da_tela // 20, altura_da_tela // 4 + 50))
+    texto_instrucoes2 = instrucoes_font.render("Seta para CIMA: Pular", True, (255, 255, 255))
+    gameDisplay.blit(texto_instrucoes2, (largura_da_tela // 20, altura_da_tela // 4 + 100))
+    texto_instrucoes3 = instrucoes_font.render("Seta para ESQUERDA/DIREITA: Mover", True, (255, 255, 255))
+    gameDisplay.blit(texto_instrucoes3, (largura_da_tela // 20, altura_da_tela // 4 + 150))
+    texto_instrucoes4 = instrucoes_font.render("Evite os obstáculos! Pressione ENTER para começar.", True, (255, 255, 255))
+    gameDisplay.blit(texto_instrucoes4, (largura_da_tela // 20, altura_da_tela // 4 + 200))
+    frase = instrucoes_font.render("See you space, player!", True, (255, 255, 255))
+    gameDisplay.blit(frase, (largura_da_tela // 20, altura_da_tela // 4 + 250))
+
+    pygame.display.update()
+
+    # Esperar até que o jogador pressione Enter para começar
+    esperando = True
+    while esperando:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_RETURN:  # Quando pressionar Enter
+                    esperando = False
 
 # Função principal do jogo
 def game_loop():
@@ -64,22 +99,17 @@ def game_loop():
     chao_y = altura_da_tela - base
     teto_altura = 40
 
-    # Relógio do jogo
+# Relógio do jogo
     clock = pygame.time.Clock()
     
+    ################################################### 2
     # Variável para controle do jogo
-    ativo = True
+    jogando = True
     game_over = False
-    
-   # musica_de_fundo = pygame.mixer.music.load("C:\Users\david douglas\Downloads\Dirk Dehler - Dreamgirl 88.mp3")
-    #pygame.mixer.music.play(-1)
-
-    #explosao = pygame.mixer.sound('nome do arquivo.wav ( tem que ser nesse formato)')
-    
-    while ativo:
+    while jogando:
         # Desenha a imagem de fundo
-        gameDisplay.blit(fundo, (0, 0))  
-
+        gameDisplay.blit(fundo1, (0, 0))  
+           
         # Processar eventos
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -98,6 +128,9 @@ def game_loop():
                     velocidade_x = -velocidade_cubo
                 if evento.key == pygame.K_RIGHT:
                     velocidade_x = velocidade_cubo
+                if evento.key == pygame.K_SPACE:
+                    pygame.quit()
+                    sys.exit()
 
             if evento.type == pygame.KEYUP:
                 if evento.key in (pygame.K_LEFT, pygame.K_RIGHT):
@@ -112,68 +145,68 @@ def game_loop():
             cubo_x += velocidade_x
 
             # Impedir que o cubo saia da tela
-            if cubo_x < 0:
-                cubo_x = 0
-            if cubo_x > largura_da_tela - cubo_largura:
-                cubo_x = largura_da_tela - cubo_largura
+            cubo_x = max(0, min(cubo_x, largura_da_tela - cubo_largura))
 
             # Evitar que o cubo caia do chão
             if cubo_y >= chao_y - cubo_altura:
                 cubo_y = chao_y - cubo_altura
                 no_chao = True
                 velocidade_y = 0
-            ###############################################
+
             # Gerar obstáculos aleatórios
             contador_obstaculo += 1
             if contador_obstaculo >= tempo_entre_obstaculos:
                 contador_obstaculo = 0
                 tipo = random.choice(["cima", "direita"])
+
                 if tipo == "cima":
+                    # Obstáculo caindo do topo ou eixo Y
+                    # largura_da_tela-40 para que o obstaculo não ultrapasse o eixo  X da tela gerado no eixo Y
                     obstaculo = pygame.Rect(random.randint(0, largura_da_tela - 40), 0, 40, 40)
-                    obstaculos.append(obstaculo)
                 else:
+                    # Obstáculo vindo da direita no chão ou no eixo X
+                    # chao_y-40 é para que o obstaculo não saia da base no eixo Y do jogo 40x40 pixel 
                     obstaculo = pygame.Rect(largura_da_tela, chao_y - 40, 40, 40)
-                    obstaculos.append(obstaculo)
+
+                obstaculos.append(obstaculo)
 
             # Mover obstáculos
             for obstaculo in obstaculos:
-                if obstaculo.y == -1:  # Obstáculos caindo
-                    obstaculo.y += 5
+                if obstaculo.y == 0:  # Obstáculos sendo gerados na cordenada 0 do eixo Y
+                    obstaculo.y += 300 # Faz com que ele se mova para baixo ate a posição 300
                 else:  # Obstáculos vindo da direita
-                    obstaculo.x -= -5
+                    obstaculo.x -= 5  # Agora se não for constado no eixo Y gera no eixo X movendo ele para a esquerda
 
             # Verificar colisão
             for obstaculo in obstaculos:
                 if pygame.Rect(cubo_x, cubo_y, cubo_largura, cubo_altura).colliderect(obstaculo):
                     game_over = True
+########################################################## 3
+        # Desenhar o chão e o teto
+        pygame.draw.rect(gameDisplay, cor_do_chao, (0, chao_y, largura_da_tela, base))
+        pygame.draw.rect(gameDisplay, cor_do_teto, (0, 0, largura_da_tela, teto_altura))
 
+        # Desenhar cubo e obstáculos
+        pygame.draw.rect(gameDisplay, cor_do_cubo, (cubo_x, cubo_y, cubo_largura, cubo_altura))
+        for obstaculo in obstaculos:
+            pygame.draw.rect(gameDisplay, cor_obstaculo, obstaculo)
 
-            # Desenhar o chão e o teto
-            pygame.draw.rect(gameDisplay, cor_do_chao, (0, chao_y, largura_da_tela, base))
-            pygame.draw.rect(gameDisplay, cor_do_teto, (0, 0, largura_da_tela, teto_altura))
-
-            # Desenhar cubo e obstáculos
-            pygame.draw.rect(gameDisplay, cor_do_cubo, (cubo_x, cubo_y, cubo_largura, cubo_altura))
-            for obstaculo in obstaculos:
-                pygame.draw.rect(gameDisplay, cor_obstaculo, obstaculo)
-        
-        # Se o jogador perder, exibir "Game Over" e opção de reiniciar
-        #
+        # Se o jogador perder, exibir "Game Over"
         if game_over:
-            texto_game_over = fonte.render("Acho que perdeu! Pressione R para reiniciar", True, (255, 0, 0))
-            gameDisplay.blit(texto_game_over, (largura_da_tela // 4 - 100, altura_da_tela // 2))
+            texto_game_over = fonte.render("Acho que perdeu!", True, (255, 0, 0))
+            gameDisplay.blit(texto_game_over, (largura_da_tela // 4, altura_da_tela // 2))
             texto_reiniciar = fonte.render("Pressione R para reiniciar", True, (255, 255, 255))
-            gameDisplay.blit(texto_reiniciar, (largura_da_tela // 4 - 100, altura_da_tela // 2 + 50))
-
-
-
-
-
+            gameDisplay.blit(texto_reiniciar, (largura_da_tela // 4, altura_da_tela // 2 + 50))
+            texto_sair = fonte.render("Caso queira desisitir aperte a tecla Espaço",True,(255, 255, 255))
+            gameDisplay.blit(texto_sair, (largura_da_tela // 4, altura_da_tela // 2 + 100))
         # Atualizar a tela
-    pygame.display.update()
+        pygame.display.update()
 
         # Controlar a taxa de quadros
-    clock.tick(60)
+        clock.tick(60)
+
+# Exibir instruções
+exibir_instrucoes() 
 
 # Rodar o jogo
 game_loop()
