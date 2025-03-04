@@ -37,7 +37,15 @@ pygame.mixer.music.play(-1)
 fundo1 = pygame.image.load('fundo.jpg')  
 fundo1 = pygame.transform.scale(fundo1, (largura_da_tela, altura_da_tela)) 
 
+pontos = 0 
+def exibe_mensagem(msg, tamanho, cor):
+    # o True e False, para os parametros negritos e italicos
+    fonte = pygame.font.SysFont('comicsansms', tamanho, True, False)
+    mensagem = f'{msg}'
+    texto_formatado = fonte.render(mensagem, True, cor )
+    return texto_formatado
 
+    
 # Função para exibir as instruções na tela inicial
 def exibir_instrucoes():
     instrucoes_font = pygame.font.Font(None, 50)
@@ -57,6 +65,7 @@ def exibir_instrucoes():
     gameDisplay.blit(frase, (largura_da_tela // 20, altura_da_tela // 4 + 250))
 
     pygame.display.update()
+
 
     # Esperar até que o jogador pressione Enter para começar
     esperando = True
@@ -181,6 +190,15 @@ def game_loop():
             for obstaculo in obstaculos:
                 if pygame.Rect(cubo_x, cubo_y, cubo_largura, cubo_altura).colliderect(obstaculo):
                     game_over = True
+                    
+                else: 
+                    # Tamanho e cor e a somatoria de pontos
+                    pontos += 1
+                texto_placar = exibe_mensagem(pontos, 40 (0,0,0)) 
+                
+                gameDisplay.blit(texto_placar, (520,30))
+                   
+                    
 ########################################################## 3
         # Desenhar o chão e o teto
         pygame.draw.rect(gameDisplay, cor_do_chao, (0, chao_y, largura_da_tela, base))
