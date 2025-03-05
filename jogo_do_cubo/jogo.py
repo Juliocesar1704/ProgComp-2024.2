@@ -224,3 +224,4 @@ exibir_instrucoes()
 
 # Rodar o jogo
 game_loop()
+pygame.quit()  # Encerra o pygame
