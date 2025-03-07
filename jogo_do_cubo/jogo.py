@@ -8,7 +8,7 @@ pygame.init()  # Inicializa todos os módulos do pygame
 altura_da_tela = 600  # Altura da tela do jogo
 largura_da_tela = 1000  # Largura da tela do jogo
 gameDisplay = pygame.display.set_mode((largura_da_tela, altura_da_tela))  # Cria a tela do jogo
-pygame.display.set_caption("Corrida do Cubo")  # Define o título da janela
+pygame.display.set_caption("Cube Space Run")  # Define o título da janela
 
 # Lista de cores em formato RGB (cada tupla representa uma cor)
 cores = [
@@ -27,20 +27,20 @@ cores = [
     (128, 128, 128),  # GRAY
 ]
 
-# Fonte para exibir a mensagem "Game Over"
+# Fonte para exibir as mensagems
 fonte = pygame.font.Font(None, 50)
 
 # Geração da soundtrack do jogo
 musica_de_fundo1 = pygame.mixer.music.load('space.mp3')  # Carrega a música de fundo
 pygame.mixer.music.play(-1)  # Toca a música de fundo infinitamente
 
-# Carregar a imagem de fundo
-fundo1 = pygame.image.load('fundo.jpg')  # Carrega a imagem de fundo
-fundo1 = pygame.transform.scale(fundo1, (largura_da_tela, altura_da_tela))  # Ajusta o tamanho da imagem de fundo
+# Carregar a imagem de fundo e ajustar o tamanho
+fundo1 = pygame.image.load('fundo.jpg') 
+fundo1 = pygame.transform.scale(fundo1, (largura_da_tela, altura_da_tela)) 
 
 # Função para exibir uma mensagem na tela
 def exibe_mensagem(msg, tamanho, cor):
-    fonte = pygame.font.SysFont('comicsansms', tamanho, True, False)  # Define a fonte para o texto
+    fonte = pygame.font.SysFont('comicsansms', tamanho, True, False)  # Define a fonte para o texto sendo o tamanho e negrito e italico 
     mensagem = f'{msg}'  # A mensagem que será exibida
     texto_formatado = fonte.render(mensagem, True, cor)  # Renderiza a mensagem
     return texto_formatado  # Retorna a imagem do texto renderizado
@@ -51,7 +51,7 @@ def exibir_instrucoes():
     gameDisplay.blit(fundo1, (0, 0))  # Exibe o fundo na tela
 
     # Exibe o título e as instruções do jogo
-    texto_titulo = instrucoes_font.render("Bem-vindo ao Jogo da Corrida do Cubo!", True, (255, 255, 255))
+    texto_titulo = instrucoes_font.render("Bem-vindo ao Jogo da Corrida do Cubo!", True, (255, 255, 255)) # Renderiza o texto com true para negrito e a tupla com o valor das cores
     gameDisplay.blit(texto_titulo, (largura_da_tela // 20, altura_da_tela // 4))
     texto_instrucoes1 = instrucoes_font.render("Use as setas para movimentar o cubo:", True, (255, 255, 255))
     gameDisplay.blit(texto_instrucoes1, (largura_da_tela // 20, altura_da_tela // 4 + 50))
@@ -118,7 +118,7 @@ def game_loop():
 
     # Loop principal do jogo
     while jogando:
-        gameDisplay.blit(fundo1, (0, 0))  # Desenha o fundo na tela
+        gameDisplay.blit(fundo1, (0, 0))  # Desenha o fundo na tela 
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -179,7 +179,7 @@ def game_loop():
             # Move os obstáculos
             for obstaculo in obstaculos:
                 if obstaculo.y == 0:  # Se o obstáculo estiver no topo
-                    obstaculo.y += 300  # Faz com que ele desça até a posição 300 no eixo Y
+                    obstaculo.y += 350  # Faz com que ele desça até a posição 300 no eixo Y
                 else:
                     obstaculo.x -= 5  # Faz o obstáculo se mover da direita para a esquerda
 
